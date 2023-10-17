@@ -1,0 +1,17 @@
+.box {
+    &__title {
+        font-size: 36px;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        overflow: hidden;
+    }
+
+    &__content {
+        color: blue;
+
+        &--green {
+            color: green;
+        }
+    }
+}

@@ -1,0 +1,46 @@
+.main-content{
+    max-width: 1170px !important;
+    padding: 30px 15px !important;
+    background: #fff;
+    border: 1px solid #dbe0e8;
+    border-bottom: none;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+
+    .categorys{
+        width: 25%;
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            
+            height: auto ;
+            overflow: auto;
+            margin-left: 5px;
+
+            a {
+                display: block;
+                color: black;
+                padding: 16px;
+                text-decoration: none;
+                text-align: left;
+            }
+
+            a.active {
+                background-color: #EB2525;
+                color: white;
+            }
+
+            a:hover:not(.active) {
+                background-color: #555;
+                color: white;
+            }
+        }
+    }
+    .products{
+        width: 74%;
+    }
+
+}

@@ -1,0 +1,14 @@
+.navigation {
+    background: #FED100;
+
+    ul {
+        li {
+            display: inline-block;
+            a {
+                display: block;
+                padding: 10px 15px;
+                text-decoration: none;
+            }
+        }
+    }
+}
