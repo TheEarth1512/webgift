@@ -7099,6 +7099,29 @@ input[type="file"] {
     padding-top: 5px;
 }
 
+.capitalize {
+    text-transform: capitalize;
+}
+
+.d-none {
+    display: none;
+}
+
 .img-product {
     height: 60px;
+}
+
+.select-img {
+    position: relative;
+}
+
+#img-old {
+    position: absolute;
+    top: 32px;
+    z-index: 9999;
+    padding: 6px;
+    left: 108px;
+    border: none;
+    color: red;
+    width: 350px;
 }
