@@ -236,13 +236,13 @@
                           <div class="modal-content">
                             <div class="modal-header">
                               <h1 class="modal-title fs-5">Add New Product</h1>
-                              <i class="fa-regular fa-circle-xmark btn-close"></i>
+                              <i class="fa-regular fa-circle-xmark js-btn-close btn-close"></i>
                             </div>
                             <div class="modal-body">
                                 <form id="form-add-product" data-url="/add-product">
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Product Name</label>
-                                    <input type="text" class="form-control" id="name-product" name="name">
+                                        <input type="text" class="form-control" id="name-product" name="name">
                                     </div>
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Category</label>
@@ -268,10 +268,10 @@
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="img">Select image</label>
+                                        <label for="img" class="col-form-label">Select image</label>
                                         <input type="file" class="form-control" id="img" name="img" accept="image/*">
                                     </div>
-                                                
+                                    <input type="text" class="form-control d-none" id="image" name="image">
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -287,31 +287,47 @@
                           <div class="modal-content">
                             <div class="modal-header">
                               <h1 class="modal-title fs-5">Sửa sản phẩm</h1>
-                              <button type="button" class="btn-close js-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              <i class="fa-regular fa-circle-xmark js-btn-close btn-close"></i>
                             </div>
                             <div class="modal-body">
                               <form id="form-edit-product">
-                                <div class="mb-3">
-                                  <label for="recipient-name" class="col-form-label">Tên sản phẩm:</label>
-                                  <input type="text" class="form-control" id="" name="name">
-                                </div>
-                                <div class="mb-3">
-                                  <label for="message-text" class="col-form-label">Giá sản phẩm:</label>
-                                  <input type="number" class="form-control" id="" name="price">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Hình sản phẩm:</label>
-                                    <input type="text" class="form-control" id="" name="image">
-                                  </div>
-                                  <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Mô tả:</label>
-                                    <textarea class="form-control" id="message-text" name="description"></textarea>
-                                  </div>              
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Product Name</label>
+                                        <input type="text" class="form-control" id="name-product" name="name">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Category</label>
+                                        <select class="select-category select-form-input" name="category" id="category">
+                                            <option class="default-select" selected>-- Choose category --</option>
+                                            <option value="gift-picture">Hình lưu niệm</option>
+                                            <option value="gift-event">Vật phẩm sự kiện</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Quantity</label>
+                                        <input type="number" class="form-control" id="quantity" name="quantity">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Unit Price</label>
+                                        <input class="form-control" id="message-text" name="price">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Status</label>
+                                        <select class="select-status select-form-input" name="status" id="status">
+                                            <option value="available" selected>Còn hàng</option>
+                                            <option value="unavailable">Hết hàng</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 select-img">
+                                        <label for="img">Select image</label>
+                                        <input type="text" id="img-old" name="img-old">
+                                        <input type="file" class="form-control" id="img" name="img" accept="image/*">
+                                    </div>
                                   <input type="hidden" name="id">    
                               </form>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-secondary js-btn-close" data-bs-dismiss="modal">Close</button>
                               <button type="button" class="btn btn-warning" id="button-edit-product">Cập nhật</button>
                             </div>
                           </div>

@@ -22,9 +22,9 @@ function loadProductsHtml(products) {
             <td>${product.category}</td>
             <td>${product.quantity}</td>
             <td>${product.price} dong</td>
-            <td><span class="badge-dot badge-brand mr-1"></span>InTransit </td>
+            <td class="capitalize">${product.status}</td>
             <td>
-                <button type="button" id="btn-edit-product" class="btn btn-danger btn-edit w-100">
+                <button type="button" id="btn-edit-product" data-pid="${product.id}" class="btn btn-danger btn-edit w-100">
                     <i class="fa-solid fa-gear"></i>
                 </button>
             </td>
@@ -73,8 +73,8 @@ function addProduct(data) {
         success: function(data) {
           console.log("Data received:", data);
           fetchProducts();
-          alert('Thêm thành công');
           $('#add-product-modal').modal('hide');
+          alert('Thêm thành công');
         },
         error: function() {
           console.log("Error retrieving data.");
@@ -89,6 +89,20 @@ function convertFormValuesToObject(formValues) {
     }), {});
 }
 
+function updateFormFields(product) {
+    console.log("updateFormFields");
+    product.then((r) => {
+        $('#form-edit-product input[name="name"]').val(r.name);
+        $('#form-edit-product select[name="category"]').val(r.category);
+        $('#form-edit-product input[name="quantity"]').val(r.quantity);
+        $('#form-edit-product input[name="price"]').val(r.price);
+        $('#form-edit-product select[name="status"]').val(r.status);
+        $('#form-edit-product input[name="img-old"]').val(r.image);
+        $('#form-edit-product input[name="id"]').val(r.id)
+    });
+    ;
+}
+
 $(function() {
     fetchProducts();
     // Function to add new product to API
@@ -97,16 +111,24 @@ $(function() {
     });
 
     $('#button-add-product').click (function() {
+        const linkImg = $('#form-add-product input[name="img"]').val();
+        $('#form-add-product input[name="image"]').val(linkImg);
         const formValues = convertFormValuesToObject($('#form-add-product').serializeArray());
         addProduct(formValues);
         
     });
 
+    $(document).on('click', '#btn-edit-product', function() {
+        console.log('product-id: ', $(this).attr('data-pid'));
+        $('#edit-product-modal').modal('show');
+        const productId = $(this).attr('data-pid');
+        updateFormFields(getProduct(productId));
+    });
+
     // Function to edit product to API
-    $('#btn-edit-product').click(function() {
-        console.log('helo');
+    $(document).on('click', '#button-edit-product', async function() {
         $(this).prop('disabled', true);
-        const formValues = convertFormValuesToObject($('#form-edit-product').serializeArray())
+        const formValues = convertFormValuesToObject($('#form-edit-product').serializeArray());
   
         $.ajax({
           url: `${productsAPI}/${formValues.id}`,
@@ -147,6 +169,29 @@ $(function() {
         }
     });
 
+    // Function to delete product to API
+    $(document).on('click', '#btn-remove-all-products', async function() {
+        const isConfirmed = confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');
+        const id = $(this).parents('tr').data('id');
+        console.log(id);
+  
+        if (isConfirmed) {
+          $(this).prop('disabled', true);
+  
+          $.ajax({
+            url: productsAPI,
+            method: "DELETE",
+            success: (data) => {
+              fetchProducts();
+              $(this).prop('disabled', false);
+            },
+            error: function() {
+              console.log("Error retrieving data.");
+            }
+          });
+        }
+    });
+
     $('#select-all-products').on('click', function() {
         if ($(this).is(':checked')) {
             for (let index = 0; index <= amountProducts; index++) {
@@ -162,5 +207,6 @@ $(function() {
 
     $('.js-btn-close').on('click', function() {
         $('#add-product-modal').modal('hide');
+        $('#edit-product-modal').modal('hide');
     });
 });
